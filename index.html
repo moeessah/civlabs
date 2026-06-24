@@ -12,17 +12,18 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #fafafa;
-  --white: #fff;
-  --lime: #c8f135;
-  --navy: #1b2a52;
+  --bg:     #fafafa;
+  --white:  #ffffff;
+  --lime:   #c8f135;
+  --navy:   #1b2a52;
   --navy-d: #131d3a;
-  --coral: #ff5b5b;
-  --ink: #0d0d0b;
-  --ink50: rgba(13,13,11,.46);
-  --ink15: rgba(13,13,11,.11);
-  --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --ease: cubic-bezier(.16,1,.3,1);
+  --coral:  #ff5b5b;
+  --ink:    #0d0d0b;
+  --ink50:  rgba(13,13,11,.46);
+  --ink30:  rgba(13,13,11,.30);
+  --ink15:  rgba(13,13,11,.11);
+  --sans:   'Plus Jakarta Sans', system-ui, sans-serif;
+  --ease:   cubic-bezier(.16,1,.3,1);
 }
 
 html { scroll-behavior: smooth; }
@@ -38,6 +39,7 @@ body {
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--lime); color: var(--ink); }
 
+/* ─── NAV ────────────────────────── */
 .nav {
   border-bottom: 1px solid var(--ink15);
   background: var(--bg);
@@ -74,6 +76,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 0 0 2px rgba(200,241,53,.25);
 }
 
+/* ─── HERO ───────────────────────── */
 .hero {
   position: relative;
   padding: 2rem 2.5rem 0;
@@ -81,7 +84,9 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
 }
 
-.hero-content { max-width: 500px; }
+.hero-content {
+  max-width: 500px;
+}
 
 .hero-eyebrow {
   display: flex;
@@ -128,7 +133,7 @@ a { color: inherit; text-decoration: none; }
 .hero-h1 .u::after {
   content: '';
   position: absolute;
-  left: -.04em;
+  left: -.04em; 
   right: -.06em;
   bottom: 0;
   height: .1em;
@@ -137,29 +142,36 @@ a { color: inherit; text-decoration: none; }
   z-index: -1;
 }
 
+/* ─── HERO IMAGE ────────────────── */
 .hero-image {
   position: absolute;
-  right: -80px;
-  top: -40px;
-  width: 550px;
+  right: -40px;
+  top: -30px;
+  width: 440px;
   height: auto;
   z-index: 2;
   pointer-events: none;
 }
 
-.hero-image img { width: 100%; height: auto; display: block; }
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
+/* ─── PORTFOLIO GRID ────────────── */
 .portfolio {
   max-width: 1152px;
   margin: 0 auto;
   padding: 1.5rem 2.5rem 4rem;
   display: grid;
-  grid-template-columns: 315px 315px;
+  grid-template-columns: 370px 370px;
   gap: 18px;
   position: relative;
   z-index: 1;
 }
 
+/* ─── PORTFOLIO COLUMN ────────────── */
 .portfolio-column {
   display: flex;
   flex-direction: column;
@@ -182,12 +194,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 .column-dot.coral { background: var(--coral); }
-.column-dot.navy  { background: var(--navy); }
+.column-dot.navy { background: var(--navy); }
 
 .column-title-row {
   display: flex;
   align-items: baseline;
   gap: .5rem;
+  flex-wrap: nowrap;
 }
 
 .column-title {
@@ -205,7 +218,9 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
 }
 
+/* ─── CARDS ──────────────────────── */
 .card {
+  background: var(--white);
   border: 1px solid var(--ink15);
   border-radius: 16px;
   padding: 1.1rem 1.3rem 1rem;
@@ -248,20 +263,39 @@ a { color: inherit; text-decoration: none; }
 .card-corner svg {
   width: 10px;
   height: 10px;
-  color: var(--ink50);
-  stroke: currentColor;
-  transition: color .28s var(--ease);
+  stroke: var(--ink50);
+  transition: stroke .28s var(--ease);
 }
 
-.card:hover .card-corner { transform: rotate(45deg); }
+.card:hover .card-corner {
+  transform: rotate(45deg);
+}
 
-.card.white:hover .card-corner { border-color: var(--ink); background: var(--ink); }
-.card.white:hover .card-corner svg { color: var(--lime); }
+.card.white:hover .card-corner {
+  border-color: var(--ink);
+  background: var(--ink);
+}
 
-.card.coral .card-corner { border-color: rgba(255,255,255,.4); }
-.card.coral .card-corner svg { color: rgba(255,255,255,.85); }
-.card.coral:hover .card-corner { border-color: var(--coral); background: var(--coral); }
-.card.coral:hover .card-corner svg { color: var(--white); }
+.card.white:hover .card-corner svg {
+  stroke: var(--lime);
+}
+
+.card.coral .card-corner {
+  border-color: rgba(255,255,255,.4);
+}
+
+.card.coral .card-corner svg {
+  stroke: rgba(255,255,255,.85);
+}
+
+.card.coral:hover .card-corner {
+  border-color: var(--coral);
+  background: var(--coral);
+}
+
+.card.coral:hover .card-corner svg {
+  stroke: var(--white);
+}
 
 .card-tag {
   font-size: .48rem;
@@ -274,9 +308,17 @@ a { color: inherit; text-decoration: none; }
   transition: color .28s var(--ease);
 }
 
-.card.white:hover .card-tag { color: var(--ink); }
-.card.coral .card-tag { color: rgba(255,255,255,.75); }
-.card.coral:hover .card-tag { color: var(--coral); }
+.card.white:hover .card-tag {
+  color: var(--ink);
+}
+
+.card.coral .card-tag {
+  color: rgba(255,255,255,.75);
+}
+
+.card.coral:hover .card-tag {
+  color: var(--coral);
+}
 
 .card-title {
   font-size: 1.15rem;
@@ -287,8 +329,13 @@ a { color: inherit; text-decoration: none; }
   transition: color .28s var(--ease);
 }
 
-.card.coral .card-title { color: var(--white); }
-.card.coral:hover .card-title { color: var(--coral); }
+.card.coral .card-title {
+  color: var(--white);
+}
+
+.card.coral:hover .card-title {
+  color: var(--coral);
+}
 
 .card-desc {
   font-size: .65rem;
@@ -299,10 +346,19 @@ a { color: inherit; text-decoration: none; }
   transition: color .28s var(--ease);
 }
 
-.card.white:hover .card-desc { color: rgba(13,13,11,.7); }
-.card.coral .card-desc { color: rgba(255,255,255,.8); }
-.card.coral:hover .card-desc { color: var(--coral); }
+.card.white:hover .card-desc {
+  color: rgba(13,13,11,.7);
+}
 
+.card.coral .card-desc {
+  color: rgba(255,255,255,.8);
+}
+
+.card.coral:hover .card-desc {
+  color: var(--coral);
+}
+
+/* ─── FOOTER ─────────────────────── */
 footer {
   background: var(--navy-d);
   padding: 2rem 0 1rem;
@@ -353,34 +409,44 @@ footer {
   z-index: 1;
 }
 
+/* ─── RESPONSIVE ─────────────────── */
 @media (max-width: 1024px) {
-  .hero-image { width: 380px; right: -60px; top: -20px; }
+  .hero-image {
+    width: 304px;
+    right: -40px;
+    top: -10px;
+  }
 }
 
 @media (max-width: 768px) {
-  .nav-inner, .footer-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
-  .hero { padding: 1.5rem 1.25rem 0; }
-  .hero-image { display: none; }
   .portfolio {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 1.5rem 1.25rem 3rem;
   }
+
+  .hero {
+    padding: 1.5rem 1.25rem 0;
+  }
+
+  .nav-inner, .footer-inner {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .hero-image {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+  * {
+    transition: none !important;
+  }
 }
 </style>
 </head>
 <body>
-
-<svg style="display:none">
-  <symbol id="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="7" y1="17" x2="17" y2="7"/>
-    <polyline points="7 7 17 7 17 17"/>
-  </symbol>
-</svg>
 
 <nav class="nav">
   <div class="nav-inner">
@@ -399,13 +465,15 @@ footer {
     </div>
     <h1 class="hero-h1">Selected<br><span class="u">Work</span></h1>
   </div>
+
   <div class="hero-image">
-    <img src="hero.png" alt="" onerror="this.style.display='none'">
+    <img src="hero.png" alt="" onerror="this.style.display='none';">
   </div>
 </section>
 
 <div class="portfolio">
 
+  <!-- LEFT COLUMN -->
   <div class="portfolio-column">
     <div class="column-header">
       <span class="column-dot coral"></span>
@@ -416,20 +484,21 @@ footer {
     </div>
 
     <a class="card white" href="https://moeessah.github.io/civilizationlabs/" target="_blank" rel="noopener noreferrer">
-      <span class="card-corner"><svg><use href="#arr"/></svg></span>
+      <span class="card-corner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <span class="card-tag">Site · positioning · pricing</span>
       <h3 class="card-title">Civilization Labs</h3>
       <p class="card-desc">Copy is intended to target decision makers, currently wordy and design is too lively.</p>
     </a>
 
     <a class="card white" href="https://moeessah.github.io/pressure/" target="_blank" rel="noopener noreferrer">
-      <span class="card-corner"><svg><use href="#arr"/></svg></span>
+      <span class="card-corner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <span class="card-tag">Site · alternate angle</span>
       <h3 class="card-title">Pressure</h3>
       <p class="card-desc">Targeting the person who writes the case rather than the one who commissions it.</p>
     </a>
   </div>
 
+  <!-- RIGHT COLUMN -->
   <div class="portfolio-column">
     <div class="column-header">
       <span class="column-dot navy"></span>
@@ -439,14 +508,14 @@ footer {
     </div>
 
     <a class="card coral" href="https://moeessah.github.io/serova/" target="_blank" rel="noopener noreferrer">
-      <span class="card-corner"><svg><use href="#arr"/></svg></span>
+      <span class="card-corner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <span class="card-tag">GTM strategy</span>
       <h3 class="card-title">Serova</h3>
       <p class="card-desc">Playbook for an acquisition firm and Go-to-market plan for two software products.</p>
     </a>
 
     <a class="card coral" href="https://moeessah.github.io/kindred/" target="_blank" rel="noopener noreferrer">
-      <span class="card-corner"><svg><use href="#arr"/></svg></span>
+      <span class="card-corner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <span class="card-tag">Partnerships</span>
       <h3 class="card-title">Kindred</h3>
       <p class="card-desc">Growth, Storytelling and Partnership framework for a career discovery platform.</p>
